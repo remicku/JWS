@@ -15,7 +15,7 @@ public class Endpoints {
     @GET
     @Path("/hello/{name}")
     public Response helloResponse(@PathParam("name") String name) {
-        if (name == null || name == "")
+        if (name == null || name.isEmpty())
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         HelloResponse res = new HelloResponse("hello " + name);
@@ -25,7 +25,7 @@ public class Endpoints {
     @POST
     @Path("/reverse")
     public Response reverseResponse(ReverseRequest str) {
-        if (str.content == null || str.content == "")
+        if (str.content == null || str.content.isEmpty())
             return Response.status(Response.Status.BAD_REQUEST).build();
         String rev = new StringBuilder(str.content).reverse().toString();
         ReverseResponse res = new ReverseResponse(str.content, rev);
