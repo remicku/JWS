@@ -25,7 +25,7 @@ public class Endpoints {
     @POST
     @Path("/reverse")
     public Response reverseResponse(ReverseRequest str) {
-        if (str.content == null || str.content.isEmpty())
+        if (str == null || str.content == null || str.content.isEmpty())
             return Response.status(Response.Status.BAD_REQUEST).build();
         String rev = new StringBuilder(str.content).reverse().toString();
         ReverseResponse res = new ReverseResponse(str.content, rev);
