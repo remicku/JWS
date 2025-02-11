@@ -1,11 +1,11 @@
 package fr.epita.assistants.presentation.rest;
 
+import fr.epita.assistants.presentation.rest.request.ReverseRequest;
 import fr.epita.assistants.presentation.rest.response.HelloResponse;
+import fr.epita.assistants.presentation.rest.response.ReverseResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import static fr.epita.assistants.presentation.rest.response.ReverseResponse.reverse;
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -14,16 +14,21 @@ public class Endpoints {
 
     @GET
     @Path("/hello/{name}")
-    public HelloResponse helloResponse(@PathParam("name") String name) {
-        return HelloResponse.content += name;
+    public Response helloResponse(@PathParam("name") String name) {
+        if (name == null || name == "")
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        HelloResponse res = new HelloResponse("hello " + name);
+        return Response.ok(res).build();
     }
 
     @POST
     @Path("/reverse")
-    public String reverseResponse(String str) {
-        Response r = new Response() {
-        };
-        r.getEntity();
-        return reverse(str);
+    public Response reverseResponse(ReverseRequest str) {
+        if (str.content == null || str.content == "")
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        String rev = new StringBuilder(str.content).reverse().toString();
+        ReverseResponse res = new ReverseResponse(str.content, rev);
+        return Response.ok(res).build();
     }
 }

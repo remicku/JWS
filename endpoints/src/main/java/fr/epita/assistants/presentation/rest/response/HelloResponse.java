@@ -1,9 +1,9 @@
 package fr.epita.assistants.presentation.rest.response;
 
 public class HelloResponse {
-    public static String content = "hello ";
+    public String content;
 
-    public HelloResponse() {
-        
+    public HelloResponse(String content) {
+        this.content = content;
     }
 }
