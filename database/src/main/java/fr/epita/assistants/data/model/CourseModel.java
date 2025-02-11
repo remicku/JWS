@@ -14,7 +14,8 @@ public class CourseModel {
     public String name;
 
     @OneToMany
+    @JoinColumn(name = "course_id")
     List<StudentModel> student_list;
 
-    @ElementCollection @CollectionTable(name = "course_model_tags") List<String> tag;
+    @ElementCollection @CollectionTable(name = "course_model_tags", joinColumns = @JoinColumn(name = "course_id")) List<String> tag;
 }
