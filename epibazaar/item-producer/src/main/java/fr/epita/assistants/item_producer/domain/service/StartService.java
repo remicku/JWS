@@ -1,13 +1,11 @@
 package fr.epita.assistants.item_producer.domain.service;
 
 import fr.epita.assistants.common.aggregate.ItemAggregate;
-import fr.epita.assistants.common.api.response.StartResponse;
 import fr.epita.assistants.common.command.ResetInventoryCommand;
 import fr.epita.assistants.item_producer.data.model.GameModel;
 import fr.epita.assistants.item_producer.data.model.PlayerModel;
 import fr.epita.assistants.item_producer.data.repository.GameRepository;
 import fr.epita.assistants.item_producer.data.repository.PlayerRepository;
-import fr.epita.assistants.item_producer.presentation.rest.StartResource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.eclipse.microprofile.reactive.messaging.Channel;
@@ -62,7 +60,8 @@ public class StartService {
                 i += 2;
             }
 
-            res.add(list);
+            if (!list.isEmpty())
+                res.add(list);
             i++;
         }
 
@@ -70,7 +69,7 @@ public class StartService {
     }
 
     @Transactional
-    public StartResponse initGame(String mapPath) {
+    public List<List<ItemAggregate.ResourceType>> initGame(String mapPath) {
         String rleMap = mapToRLE(mapPath);
         List<List<ItemAggregate.ResourceType>> map = parseMap(rleMap);
 
@@ -83,14 +82,16 @@ public class StartService {
         PlayerModel player = new PlayerModel(0, 0, 1.0f, 1.0f, 1.0f, null, null);
         playerRepository.persist(player);
 
-        //resetInventoryEmitter.send(new ResetInventoryCommand());
+        return map;
 
-        return new StartResponse(map);
+        //return new StartResponse(map);
     }
 
-    public StartResponse startGame(String mapPath) {
-        StartResponse start = initGame(mapPath);
+    public List<List<ItemAggregate.ResourceType>> startGame(String mapPath) {
+        List<List<ItemAggregate.ResourceType>> map = initGame(mapPath);
+        //StartResponse start = initGame(mapPath);
         resetInventoryEmitter.send(new ResetInventoryCommand());
-        return start;
+        return map;
+        //return start;
     }
 }
