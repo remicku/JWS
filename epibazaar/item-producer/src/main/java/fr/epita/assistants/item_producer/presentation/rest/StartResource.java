@@ -21,7 +21,11 @@ public class StartResource {
 
     @POST
     public Response start(StartRequest request) {
-        StartResponse res = startService.startGame(request.getMapPath());
-        return Response.ok(res).build();
+        try {
+            StartResponse res = startService.startGame(request.getMapPath());
+            return Response.ok(res).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 }

@@ -20,23 +20,23 @@ public class PlayerModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    int pos_x;
-    int pos_y;
-    float collect_rate_multiplier;
-    float move_speed_multiplier;
-    float stamina_multiplier;
-    LocalDateTime last_collect;
-    LocalDateTime last_move;
+    int posX;
+    int posY;
+    float collectRateMultiplier;
+    float moveSpeedMultiplier;
+    float staminaMultiplier;
+    LocalDateTime lastCollect;
+    LocalDateTime lastMove;
 
-    public PlayerModel(int x, int y, float collect_rate_multiplier, float move_speed_multiplier,
-                       float stamina_multiplier, LocalDateTime last_collect,
-                       LocalDateTime last_move) {
-        this.pos_x = x;
-        this.pos_y = y;
-        this.collect_rate_multiplier = collect_rate_multiplier;
-        this.move_speed_multiplier = move_speed_multiplier;
-        this.stamina_multiplier = stamina_multiplier;
-        this. last_collect = last_collect;
-        this.last_move = last_move;
+    public PlayerModel(int x, int y, float collectRateMultiplier, float moveSpeedMultiplier,
+                       float staminaMultiplier, LocalDateTime lastCollect,
+                       LocalDateTime lastMove) {
+        this.posX = x;
+        this.posY = y;
+        this.collectRateMultiplier = collectRateMultiplier;
+        this.moveSpeedMultiplier = moveSpeedMultiplier;
+        this.staminaMultiplier = staminaMultiplier;
+        this. lastCollect = lastCollect;
+        this.lastMove = lastMove;
     }
 }
