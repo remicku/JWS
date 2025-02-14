@@ -1,5 +1,5 @@
 *idea/
 *target/
-*tar*
+*.tar*
 *.jar
 *viewer/
