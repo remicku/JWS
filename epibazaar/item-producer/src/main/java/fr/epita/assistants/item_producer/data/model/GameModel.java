@@ -17,6 +17,7 @@ public class GameModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @Column(columnDefinition = "TEXT")
     String map;
 
     public GameModel(String map) {
