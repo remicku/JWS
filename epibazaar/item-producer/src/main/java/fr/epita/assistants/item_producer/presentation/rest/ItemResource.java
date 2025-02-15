@@ -3,6 +3,7 @@ package fr.epita.assistants.item_producer.presentation.rest;
 import fr.epita.assistants.common.api.response.ItemsResponse;
 import fr.epita.assistants.item_producer.data.model.ItemModel;
 import fr.epita.assistants.item_producer.domain.service.ItemService;
+import fr.epita.assistants.item_producer.errors.StartError;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -22,13 +23,18 @@ public class ItemResource {
 
     @GET
     public Response getResources() {
-        List<ItemsResponse.ItemData> res = new ArrayList<>();
-        List<ItemModel> itemList = itemService.getItemResources();
+        try {
+            List<ItemsResponse.ItemData> res = new ArrayList<>();
+            List<ItemModel> itemList = itemService.getItemResources();
 
-        for (ItemModel i : itemList) {
-            res.add(new ItemsResponse.ItemData(i.getId(), i.getQuantity(), i.getType()));
+            for (ItemModel i : itemList) {
+                res.add(new ItemsResponse.ItemData(i.getId(), i.getQuantity(), i.getType()));
+            }
+
+            return Response.ok(new ItemsResponse(res)).build();
         }
-
-        return Response.ok(new ItemsResponse(res)).build();
+        catch (RuntimeException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Player problem")).build();
+        }
     }
 }

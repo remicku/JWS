@@ -64,8 +64,8 @@ public class MoveService {
         MoveEntity move = getNewCoordinates(direction, player);
 
         if (isWalkable(move.posX, move.posY) && (player.getLastMove() == null ||
-                player.getLastMove().isBefore(LocalDateTime.now()
-                        .plus(tick * (delay / (long) player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS)))) {
+                LocalDateTime.now().isAfter(player.getLastMove()
+                        .plus((long) ((tick * delay) / player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS)))) {
             player.setPosX(move.posX);
             player.setPosY(move.posY);
             player.setLastMove(LocalDateTime.now());

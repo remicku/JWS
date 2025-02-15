@@ -1,6 +1,10 @@
 package fr.epita.assistants.item_producer.presentation.rest;
 
 import fr.epita.assistants.common.api.response.UpgradeCostResponse;
+import fr.epita.assistants.item_producer.domain.entity.MoveEntity;
+import fr.epita.assistants.item_producer.domain.entity.UpgradeEntity;
+import fr.epita.assistants.item_producer.domain.service.UpgradeService;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -13,12 +17,12 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UpgradesResource {
-    @ConfigProperty(name = "JWS_UPGRADE_COLLECT_COST") float upgradeCollectCost;
-    @ConfigProperty(name = "JWS_UPGRADE_MOVE_COST") float upgradeMoveCost;
-    @ConfigProperty(name = "JWS_UPGRADE_STAMINA_COST") float upgradeStaminaCost;
+    @Inject
+    UpgradeService upgradeService;
 
     @GET
     public Response getUpgrades() {
-        return Response.ok(new UpgradeCostResponse(upgradeCollectCost, upgradeMoveCost, upgradeStaminaCost)).build();
+        UpgradeEntity res = upgradeService.getUpgrades();
+        return Response.ok(new UpgradeCostResponse(res.upgradeCollectCost, res.upgradeMoveCost, res.upgradeStaminaCost)).build();
     }
 }
