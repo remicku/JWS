@@ -5,6 +5,7 @@ import fr.epita.assistants.inventory.data.repository.ItemRepository;
 import fr.epita.assistants.inventory.domain.entity.ItemEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ public class ItemService {
     @Inject
     ItemRepository itemRepository;
 
+    @Transactional
     public ResetInventoryAggregate resetInventory() {
         List<ItemEntity> itemsToDelete = itemRepository.findAll().list();
 
