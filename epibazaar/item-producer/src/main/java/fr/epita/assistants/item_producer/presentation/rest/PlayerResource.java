@@ -3,6 +3,7 @@ package fr.epita.assistants.item_producer.presentation.rest;
 import fr.epita.assistants.common.api.response.PlayerResponse;
 import fr.epita.assistants.item_producer.data.model.PlayerModel;
 import fr.epita.assistants.item_producer.domain.service.PlayerService;
+import fr.epita.assistants.item_producer.errors.StartError;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -29,7 +30,7 @@ public class PlayerResource {
             return Response.ok(new PlayerResponse(res)).build();
         }
         catch (RuntimeException e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Player problem")).build();
         }
     }
 }

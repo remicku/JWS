@@ -44,7 +44,7 @@ public class StartService {
         }
     }
 
-    public List<List<ItemAggregate.ResourceType>> parseMap(String rleMap) {
+    public static List<List<ItemAggregate.ResourceType>> parseMap(String rleMap) {
         List<List<ItemAggregate.ResourceType>> res = new ArrayList<>();
         int i = 0;
         int len = rleMap.length();

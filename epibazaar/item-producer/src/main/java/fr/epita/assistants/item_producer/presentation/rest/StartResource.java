@@ -4,6 +4,7 @@ import fr.epita.assistants.common.aggregate.ItemAggregate;
 import fr.epita.assistants.common.api.request.StartRequest;
 import fr.epita.assistants.common.api.response.StartResponse;
 import fr.epita.assistants.item_producer.domain.service.StartService;
+import fr.epita.assistants.item_producer.errors.StartError;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -26,14 +27,14 @@ public class StartResource {
     public Response start(StartRequest request) {
         try {
             if (request == null || request.mapPath == null || request.mapPath.isEmpty())
-                return Response.status(Response.Status.BAD_REQUEST).build();
+                return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Invalid path")).build();
 
             List<List<ItemAggregate.ResourceType>> map = startService.startGame(request.getMapPath());
             //StartResponse res = startService.startGame(request.getMapPath());
             return Response.ok(new StartResponse(map)).build();
         }
         catch (IllegalArgumentException e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Invalid path")).build();
         }
     }
 }
