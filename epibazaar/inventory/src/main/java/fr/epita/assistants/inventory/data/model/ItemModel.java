@@ -1,5 +1,6 @@
 package fr.epita.assistants.inventory.data.model;
 
+import fr.epita.assistants.common.aggregate.ItemAggregate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +19,7 @@ public class ItemModel {
     int id;
 
     float quantity;
-    String type;
+
+    @Enumerated(EnumType.STRING)
+    ItemAggregate.ResourceType type;
 }

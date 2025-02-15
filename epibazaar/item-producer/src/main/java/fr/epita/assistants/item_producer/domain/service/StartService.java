@@ -32,7 +32,8 @@ public class StartService {
 
     public String mapToRLE(String mapPath) {
         try {
-            return Files.readString(Path.of(mapPath)).replace("\n", ";");
+            StringBuilder str = new StringBuilder(Files.readString(Path.of(mapPath)).replace("\n", ";"));
+            return str.deleteCharAt(str.length() - 1).toString();
         } catch (IOException e) {
             throw new IllegalArgumentException("StartService: mapToRLE: invalid mapPath provided: " + mapPath);
         }
@@ -83,15 +84,11 @@ public class StartService {
         playerRepository.persist(player);
 
         return map;
-
-        //return new StartResponse(map);
     }
 
     public List<List<ItemAggregate.ResourceType>> startGame(String mapPath) {
         List<List<ItemAggregate.ResourceType>> map = initGame(mapPath);
-        //StartResponse start = initGame(mapPath);
         resetInventoryEmitter.send(new ResetInventoryCommand());
         return map;
-        //return start;
     }
 }
