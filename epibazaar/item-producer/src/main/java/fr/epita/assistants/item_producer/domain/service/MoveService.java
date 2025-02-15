@@ -13,7 +13,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.List;
 
 @ApplicationScoped
@@ -73,7 +72,7 @@ public class MoveService {
         else if (isWalkable(move.posX, move.posY) && (player.getLastMove() == null ||
                 LocalDateTime.now().isAfter(player.getLastMove()
                         .plus((long) ((tick * delay) / player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS))))
-            throw new ArithmeticException();
+            throw new ArithmeticException("Too fast");
         else
             throw new RuntimeException("MoveService: movePlayer: Target tile is non walkable");
 

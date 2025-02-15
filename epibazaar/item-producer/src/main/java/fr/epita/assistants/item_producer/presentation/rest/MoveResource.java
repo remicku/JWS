@@ -29,7 +29,7 @@ public class MoveResource {
         catch (ArithmeticException e) {
             return Response.status(Response.Status.TOO_MANY_REQUESTS).build();
         }
-        catch (RuntimeException e) {
+        catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Impossible to move")).build();
         }
     }
