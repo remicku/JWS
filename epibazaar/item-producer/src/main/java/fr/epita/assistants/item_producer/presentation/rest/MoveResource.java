@@ -26,7 +26,10 @@ public class MoveResource {
             MoveEntity newPos = moveService.movePlayer(request.direction);
             return Response.ok(new MoveResponse(newPos.posX, newPos.posY)).build();
         }
-        catch (IllegalArgumentException e) {
+        catch (ArithmeticException e) {
+            return Response.status(Response.Status.TOO_MANY_REQUESTS).build();
+        }
+        catch (RuntimeException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Impossible to move")).build();
         }
     }
