@@ -22,21 +22,20 @@ public class PlayerModel {
 
     int posX;
     int posY;
-    float collectRateMultiplier;
+    LocalDateTime lastMove;
+    LocalDateTime lastCollect;
     float moveSpeedMultiplier;
     float staminaMultiplier;
-    LocalDateTime lastCollect;
-    LocalDateTime lastMove;
+    float collectRateMultiplier;
 
-    public PlayerModel(int x, int y, float collectRateMultiplier, float moveSpeedMultiplier,
-                       float staminaMultiplier, LocalDateTime lastCollect,
-                       LocalDateTime lastMove) {
+    public PlayerModel(int x, int y, LocalDateTime lastMove,  LocalDateTime lastCollect, float moveSpeedMultiplier,
+                       float staminaMultiplier, float collectRateMultiplier) {
         this.posX = x;
         this.posY = y;
-        this.collectRateMultiplier = collectRateMultiplier;
+        this.lastMove = lastMove;
+        this.lastCollect = lastCollect;
         this.moveSpeedMultiplier = moveSpeedMultiplier;
         this.staminaMultiplier = staminaMultiplier;
-        this. lastCollect = lastCollect;
-        this.lastMove = lastMove;
+        this.collectRateMultiplier = collectRateMultiplier;
     }
 }

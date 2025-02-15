@@ -40,7 +40,7 @@ public class StartService {
 
             return str;
         } catch (IOException e) {
-            throw new IllegalArgumentException("StartService: mapToRLE: invalid mapPath provided: " + mapPath);
+            throw new IllegalArgumentException("StartService: mapToRLE: Invalid mapPath provided: " + mapPath);
         }
     }
 
@@ -85,7 +85,7 @@ public class StartService {
         GameModel game = new GameModel(rleMap);
         gameRepository.persist(game);
 
-        PlayerModel player = new PlayerModel(0, 0, 1.0f, 1.0f, 1.0f, null, null);
+        PlayerModel player = new PlayerModel(0, 0, null, null, 1.0f, 1.0f, 1.0f);
         playerRepository.persist(player);
 
         return map;

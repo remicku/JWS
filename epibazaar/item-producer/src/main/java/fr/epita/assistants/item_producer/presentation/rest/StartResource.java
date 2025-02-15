@@ -24,11 +24,16 @@ public class StartResource {
 
     @POST
     public Response start(StartRequest request) {
-        if (request == null || request.mapPath == null || request.mapPath.isEmpty())
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        try {
+            if (request == null || request.mapPath == null || request.mapPath.isEmpty())
+                return Response.status(Response.Status.BAD_REQUEST).build();
 
-        List<List<ItemAggregate.ResourceType>> map = startService.startGame(request.getMapPath());
-        //StartResponse res = startService.startGame(request.getMapPath());
-        return Response.ok(new StartResponse(map)).build();
+            List<List<ItemAggregate.ResourceType>> map = startService.startGame(request.getMapPath());
+            //StartResponse res = startService.startGame(request.getMapPath());
+            return Response.ok(new StartResponse(map)).build();
+        }
+        catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 }
