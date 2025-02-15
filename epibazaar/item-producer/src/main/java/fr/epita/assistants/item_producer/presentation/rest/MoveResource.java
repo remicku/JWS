@@ -28,9 +28,9 @@ public class MoveResource {
             return Response.ok(new MoveResponse(newPos.posX, newPos.posY)).build();
         }
         catch (ArithmeticException e) {
-            return Response.status(Response.Status.TOO_MANY_REQUESTS).build();
+            return Response.status(Response.Status.TOO_MANY_REQUESTS).entity(new ErrorInfo("Too Fast")).build();
         }
-        catch (Exception e) {
+        catch (RuntimeException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorInfo("Impossible to move")).build();
         }
     }

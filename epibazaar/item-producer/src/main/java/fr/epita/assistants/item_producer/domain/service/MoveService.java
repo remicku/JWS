@@ -69,9 +69,8 @@ public class MoveService {
             player.setPosY(move.posY);
             player.setLastMove(LocalDateTime.now());
         }
-        else if (isWalkable(move.posX, move.posY) && (player.getLastMove() == null ||
-                LocalDateTime.now().isAfter(player.getLastMove()
-                        .plus((long) ((tick * delay) / player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS))))
+        else if (LocalDateTime.now().isBefore(player.getLastMove()
+                        .plus((long) ((tick * delay) / player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS)))
             throw new ArithmeticException("Too fast");
         else
             throw new RuntimeException("MoveService: movePlayer: Target tile is non walkable");

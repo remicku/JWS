@@ -15,6 +15,6 @@ public class ShopModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    Float price_multiplier;
-    Float upgrade_price;
+    Float priceMultiplier;
+    Float upgradePrice;
 }
