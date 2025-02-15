@@ -2,6 +2,7 @@ package fr.epita.assistants.item_producer.presentation.rest;
 
 import fr.epita.assistants.common.api.request.MoveRequest;
 import fr.epita.assistants.common.api.response.MoveResponse;
+import fr.epita.assistants.common.utils.ErrorInfo;
 import fr.epita.assistants.item_producer.domain.entity.MoveEntity;
 import fr.epita.assistants.item_producer.domain.service.MoveService;
 import fr.epita.assistants.item_producer.errors.StartError;
@@ -30,7 +31,7 @@ public class MoveResource {
             return Response.status(Response.Status.TOO_MANY_REQUESTS).build();
         }
         catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(new StartError("Impossible to move")).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorInfo("Impossible to move")).build();
         }
     }
 }

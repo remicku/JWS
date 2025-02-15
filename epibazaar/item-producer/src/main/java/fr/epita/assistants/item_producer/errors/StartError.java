@@ -1,9 +1,11 @@
 package fr.epita.assistants.item_producer.errors;
 
-public class StartError {
-    String message;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    public StartError (String message) {
-        this.message = message;
-    }
+@Getter
+@AllArgsConstructor
+public class StartError {
+    private String message;
 }
+
