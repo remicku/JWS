@@ -32,8 +32,13 @@ public class StartService {
 
     public String mapToRLE(String mapPath) {
         try {
-            StringBuilder str = new StringBuilder(Files.readString(Path.of(mapPath)).replace("\n", ";"));
-            return str.deleteCharAt(str.length() - 1).toString();
+            String str = Files.readString(Path.of(mapPath)).replace("\n", ";");
+
+            if (str.charAt(str.length() - 1) == ';') {
+                return new StringBuilder(str).deleteCharAt(str.length() - 1).toString();
+            }
+
+            return str;
         } catch (IOException e) {
             throw new IllegalArgumentException("StartService: mapToRLE: invalid mapPath provided: " + mapPath);
         }
