@@ -31,6 +31,6 @@ public class ItemResource {
             res.add(new ItemsResponse.ItemData(i.getId(), i.getQuantity(), i.getType()));
         }
 
-        return Response.ok(res).build();
+        return Response.ok(new ItemsResponse(res)).build();
     }
 }

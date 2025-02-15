@@ -15,4 +15,8 @@ public class ItemsResponse {
         ItemAggregate.ResourceType type;
     }
     public List<ItemData> itemsResponse;
+
+    public ItemsResponse(List<ItemData> itemsResponse) {
+        this.itemsResponse = itemsResponse;
+    }
 }
