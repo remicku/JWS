@@ -11,7 +11,7 @@ public class ItemsResponse {
     @AllArgsConstructor
     public static class ItemData {
         int id;
-        float quantity;
+        Float quantity;
         ItemAggregate.ResourceType type;
     }
     public List<ItemData> itemsResponse;

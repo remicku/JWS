@@ -1,31 +1,30 @@
 package fr.epita.assistants.common.api.response;
 
-import fr.epita.assistants.common.aggregate.ItemAggregate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class PlayerResponse {
     @Getter
     @AllArgsConstructor
     public static class PlayerData {
-        int posX;
-        int posY;
+        Integer posX;
+        Integer posY;
         LocalDateTime lastMove;
         LocalDateTime lastCollect;
-        float moveSpeedMultiplier;
-        float staminaMultiplier;
-        float collectRateMultiplier;
+        Float moveSpeedMultiplier;
+        Float staminaMultiplier;
+        Float collectRateMultiplier;
     }
-    public int  posX;
-    public int posY;
+
+    public Integer  posX;
+    public Integer posY;
     public LocalDateTime lastMove;
     public LocalDateTime lastCollect;
-    public float moveSpeedMultiplier;
-    public float staminaMultiplier;
-    public float collectRateMultiplier;
+    public Float moveSpeedMultiplier;
+    public Float staminaMultiplier;
+    public Float collectRateMultiplier;
 
     public PlayerResponse(PlayerData playerResponse) {
         this.posX = playerResponse.getPosX();

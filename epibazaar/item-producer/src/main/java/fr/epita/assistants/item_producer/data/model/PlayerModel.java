@@ -20,13 +20,13 @@ public class PlayerModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    int posX;
-    int posY;
+    Integer posX;
+    Integer posY;
     LocalDateTime lastMove;
     LocalDateTime lastCollect;
-    float moveSpeedMultiplier;
-    float staminaMultiplier;
-    float collectRateMultiplier;
+    Float moveSpeedMultiplier;
+    Float staminaMultiplier;
+    Float collectRateMultiplier;
 
     public PlayerModel(int x, int y, LocalDateTime lastMove,  LocalDateTime lastCollect, float moveSpeedMultiplier,
                        float staminaMultiplier, float collectRateMultiplier) {

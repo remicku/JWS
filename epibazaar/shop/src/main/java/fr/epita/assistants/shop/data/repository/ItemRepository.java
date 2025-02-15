@@ -1,7 +1,6 @@
-package fr.epita.assistants.inventory.data.repository;
+package fr.epita.assistants.shop.data.repository;
 
-import fr.epita.assistants.inventory.data.model.ItemModel;
-import fr.epita.assistants.inventory.domain.entity.ItemEntity;
+import fr.epita.assistants.shop.data.model.ItemModel;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 

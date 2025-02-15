@@ -18,7 +18,7 @@ public class ItemModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    float quantity;
+    Float quantity;
 
     @Enumerated(EnumType.STRING)
     ItemAggregate.ResourceType type;

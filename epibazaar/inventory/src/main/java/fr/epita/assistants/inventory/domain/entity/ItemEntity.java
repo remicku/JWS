@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ItemEntity {
-    float quantity;
+    Float quantity;
     ItemAggregate.ResourceType type;
 
     public ItemAggregate toAggregate() {

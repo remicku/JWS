@@ -30,7 +30,7 @@ public class MoveService {
     public boolean isWalkable(int x, int y) {
         List<List<ItemAggregate.ResourceType>> map = StartService.parseMap(gameRepository.findAll().list().getFirst().getMap());
 
-        if (y < 0 || y >= map.size() - 1 || x < 0 || x >= map.getFirst().size())
+        if (y < 0 || y >= map.size() || x < 0 || x >= map.getFirst().size())
             return false;
 
         List<ItemAggregate.ResourceType> row = map.get(y);
@@ -70,8 +70,9 @@ public class MoveService {
             player.setPosY(move.posY);
             player.setLastMove(LocalDateTime.now());
         }
-        else if (player.getLastMove().isBefore(LocalDateTime.now()
-                .plus(tick * (delay / (long) player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS)))
+        else if (isWalkable(move.posX, move.posY) && (player.getLastMove() == null ||
+                LocalDateTime.now().isAfter(player.getLastMove()
+                        .plus((long) ((tick * delay) / player.getMoveSpeedMultiplier()), ChronoUnit.MILLIS))))
             throw new ArithmeticException();
         else
             throw new RuntimeException("MoveService: movePlayer: Target tile is non walkable");

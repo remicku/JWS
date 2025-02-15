@@ -1,6 +1,8 @@
 package fr.epita.assistants.inventory.domain.service;
 
 import fr.epita.assistants.common.aggregate.ResetInventoryAggregate;
+import fr.epita.assistants.inventory.converter.EntityConverter;
+import fr.epita.assistants.inventory.data.model.ItemModel;
 import fr.epita.assistants.inventory.data.repository.ItemRepository;
 import fr.epita.assistants.inventory.domain.entity.ItemEntity;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,7 +20,8 @@ public class ItemService {
 
     @Transactional
     public ResetInventoryAggregate resetInventory() {
-        List<ItemEntity> itemsToDelete = itemRepository.findAll().list();
+        List<ItemModel> itemsList = itemRepository.findAll().list();
+        List<ItemEntity> itemsToDelete = EntityConverter.toEntity(itemsList);
 
         ResetInventoryAggregate aggregate = new ResetInventoryAggregate(
                 itemsToDelete.stream()

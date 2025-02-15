@@ -9,6 +9,6 @@ public class ItemModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    float quantity;
+    Float quantity;
     String type;
 }
